@@ -1,23 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../../../styles/Home.module.css";
-import { useEffect, useState } from "react";
-import { TProductResponse } from "./client-render.types";
+import { TProductResponse } from "../../types/products";
 
-function ClientRenderPage() {
-  const [productList, setProductList] = useState<TProductResponse>();
-
-  useEffect(() => {
-    async function getProducts() {
-      const productsResponse = await fetch("https://dummyjson.com/products");
-
-      setProductList(await productsResponse.json());
-    }
-
-    getProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+function ServerRenderPage({ productList }: { productList: TProductResponse }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -27,14 +13,7 @@ function ClientRenderPage() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        <h1 className={styles.title}>Product list, server side</h1>
 
         <div className={styles.grid}>
           {!!productList?.products?.length &&
@@ -56,4 +35,4 @@ function ClientRenderPage() {
   );
 }
 
-export default ClientRenderPage;
+export default ServerRenderPage;
