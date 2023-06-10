@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 
 const ServerProductListPage = dynamic(
-  () => import("../../src/pages/server-render"),
+  () => import("../../../src/pages/product-list/product-list"),
   { ssr: true }
 );
 
